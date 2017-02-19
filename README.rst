@@ -5,7 +5,6 @@ strolax
 
 Fast implementation of string similarity functions
 
-* Free software: MIT license
 * Written in C with Python bindings
 
 
