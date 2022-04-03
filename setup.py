@@ -18,14 +18,11 @@ requirements = [
 setup(
     name='strolax',
     version='0.0.1',
-    long_description=readme + '\n\n' ,
+    long_description=readme + '\n\n',
     author_email='me@rushter.com',
     url='https://github.com/rushter/strolax',
-    packages=[
-        'strolax',
-    ],
-    package_dir={'strolax':
-                     'strolax'},
+    packages=['strolax', ],
+    package_dir={'strolax': 'strolax'},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
@@ -35,7 +32,11 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
     ],
     test_suite='tests',
-    ext_modules=cythonize([Extension("strolax.sym", ["strolax/*.pyx", "strolax/similarity.c", "strolax/murmurhash.c"],
-                                     include_dirs=['./strolax', ])]),
+    ext_modules=cythonize(
+        [
+            Extension("strolax.clean", ["strolax/clean.pyx", ], include_dirs=['./strolax', ]),
+        ],
+        compiler_directives={'language_level': "3str"},
+    ),
 
 )

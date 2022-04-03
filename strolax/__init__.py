@@ -3,4 +3,4 @@
 __author__ = """Artem Golubin"""
 __email__ = 'me@rushter.com'
 
-from .sym import *
+__version__ = "0.0.1"
