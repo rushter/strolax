@@ -18,7 +18,8 @@ cpdef str remove_emojis(text: str):
     """
     cdef int kind = PyUnicode_KIND(text)
     if kind < 4:
-        # simple strings (1-2 byte) do not contain any emojis since their codepoints won't fit
+        # Internally, Python uses tree sizes for unicode string: 1,2 and 4 bytes.
+        # Emoji codepoints can only fit in 4-byte strings.
         return text
 
     cdef Py_UCS4 character
@@ -28,7 +29,7 @@ cpdef str remove_emojis(text: str):
 
     for character in text:
         # https://unicode.org/emoji/charts/full-emoji-list.html
-        if character >= 0x1F600 and character <= 0xE007F:
+        if 0x1F600 <= character <= 0xE007F:
             continue
         c_buffer[pos] = character
         pos += 1
