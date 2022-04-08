@@ -2,6 +2,9 @@
 from libc.stdint cimport  uint32_t
 from libc.stdlib cimport malloc, free
 
+DEF _UNICODE_EMOJI_START = 0x1F600
+DEF _UNICODE_EMOJI_END = 0xE007F
+
 cpdef str remove_emojis(text: str):
     """Removes emojis from the specified text.
 
@@ -29,7 +32,7 @@ cpdef str remove_emojis(text: str):
 
     for character in text:
         # https://unicode.org/emoji/charts/full-emoji-list.html
-        if 0x1F600 <= character <= 0xE007F:
+        if _UNICODE_EMOJI_START <= character <= _UNICODE_EMOJI_END:
             continue
         c_buffer[pos] = character
         pos += 1
